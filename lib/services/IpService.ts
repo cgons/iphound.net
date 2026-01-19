@@ -1,5 +1,5 @@
 import ipaddr from "ipaddr.js";
-import maxmind, {AsnResponse, CityResponse, Reader} from "maxmind";
+import maxmind, { AsnResponse, CityResponse, Reader } from "maxmind";
 import * as geolite2 from "geolite2-redist";
 
 import logger from "@/lib/logger";

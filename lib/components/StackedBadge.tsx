@@ -17,7 +17,9 @@ export default function StackedBadge(props: {
     <div className="font-semibold">
       <p className="mb-2 border-b border-dashed border-gray-300 px-3 pb-1">
         <Tooltip>
-          <TooltipTrigger><span>{props.value}</span></TooltipTrigger>
+          <TooltipTrigger>
+            <span>{props.value}</span>
+          </TooltipTrigger>
           {props.title && <TooltipContent>{props.title}</TooltipContent>}
         </Tooltip>
       </p>
