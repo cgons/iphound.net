@@ -66,11 +66,11 @@ export default async function Page() {
 
         <p className="mx-auto mb-2 max-w-44 border-b border-dotted border-gray-300 pb-1">
           <a
-            href="https://github.com"
+            href="https://github.com/cgons/iphound.net"
             className="inline-block hover:text-gray-600"
           >
             <GithubIconSVG />
-            &nbsp;<span>Github</span>
+            &nbsp;<span>GitHub</span>
           </a>
         </p>
         <p>
