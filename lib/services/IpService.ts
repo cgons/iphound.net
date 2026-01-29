@@ -57,13 +57,13 @@ export default class IpService {
 
   public async initializeGeoLiteDb() {
     this.geoLiteIpReader = await geolite2.open(
-      geolite2.GeoIpDbName.City, // Use the enum instead of a string!
+      geolite2.GeoIpDbName.City,
       (path) => maxmind.open<CityResponse>(path),
     );
     logger.debug("GeoLiteIpReader Initialized...");
 
     this.geoLiteAsnReader = await geolite2.open(
-      geolite2.GeoIpDbName.ASN, // Use the enum instead of a string!
+      geolite2.GeoIpDbName.ASN,
       (path) => maxmind.open<AsnResponse>(path),
     );
     logger.debug("GeoLiteAsnReader Initialized...");
