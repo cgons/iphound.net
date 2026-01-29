@@ -1,0 +1,61 @@
+# Note: 
+# - This Caddyfile is designed to work with Caddy v2.x
+# - Needs to be imported into a parent Caddyfile that defines global options
+
+
+# Snippets
+# ---------------------------------------------
+(respond_client_ip) {
+	respond "{client_ip}
+"
+}
+
+http://iphound.net {
+	# Match Browsers
+	# ---------------------------------------------
+	# Browsers coming in on HTTP get redirected to HTTPS
+	@browser {
+		path /
+		header User-Agent *Mozilla*
+	}
+	redir @browser https://{host}{uri} 308
+	# ---------------------------------------------
+
+
+	# Match Non-Browsers (CLI tools, scripts, etc.)
+	# ---------------------------------------------
+	# For non-browser clients, show client IP directly (plain text)
+	@root path /
+	handle @root {
+		import respond_client_ip
+	}
+
+	# Requests to /ip, reverse proxy to the backend service
+	@ip path /ip
+	handle @ip {
+		reverse_proxy localhost:3000
+	}
+
+	# Fallback (Catch-all for paths not matched above)
+	handle {
+		error "Not Found" 404
+	}
+	# ---------------------------------------------
+}
+
+https://iphound.net {
+	# Match Non-Browsers (CLI tools, scripts, etc.)
+	# ---------------------------------------------
+	# For non-browser clients, show client IP directly (plain text)
+	@non_browser {
+		path /
+		not header User-Agent *Mozilla*
+	}
+	handle @non_browser {
+		import respond_client_ip
+	}
+	# ---------------------------------------------
+
+	# For all other requests (including browsers), reverse proxy to the backend service
+	reverse_proxy localhost:3000
+}
