@@ -11,14 +11,14 @@ export interface AsnInfo {
 
 export interface GeoInfo {
   ipaddress: string;
-  country_name?: string;
-  country_iso_code?: string;
-  city_name?: string;
-  subdivision?: string;
-  postal_code?: string;
-  latitude?: number;
-  longitude?: number;
-  asn?: AsnInfo;
+  country_name: string;
+  country_iso_code: string;
+  city_name: string;
+  subdivision: string;
+  postal_code: string;
+  latitude: number;
+  longitude: number;
+  asn: AsnInfo;
 }
 
 export type IpAddress = {
@@ -107,18 +107,18 @@ export default class IpService {
     const rawGeoInfo = this.geoLiteIpReader.get(ip);
     const rawAsnInfo = this.geoLiteAsnReader.get(ip);
     const asnInfo: AsnInfo = {
-      asn_number: rawAsnInfo?.autonomous_system_number,
-      asn_org: rawAsnInfo?.autonomous_system_organization,
+      asn_number: rawAsnInfo?.autonomous_system_number ?? 0,
+      asn_org: rawAsnInfo?.autonomous_system_organization ?? "",
     };
     return {
       ipaddress: ip,
-      country_name: rawGeoInfo?.country?.names.en,
-      country_iso_code: rawGeoInfo?.country?.iso_code,
-      subdivision: rawGeoInfo?.subdivisions?.[0]?.names?.en,
-      city_name: rawGeoInfo?.city?.names.en,
-      postal_code: rawGeoInfo?.postal?.code,
-      latitude: rawGeoInfo?.location?.latitude,
-      longitude: rawGeoInfo?.location?.longitude,
+      country_name: rawGeoInfo?.country?.names.en ?? "",
+      country_iso_code: rawGeoInfo?.country?.iso_code ?? "",
+      subdivision: rawGeoInfo?.subdivisions?.[0]?.names?.en ?? "",
+      city_name: rawGeoInfo?.city?.names.en ?? "",
+      postal_code: rawGeoInfo?.postal?.code ?? "",
+      latitude: rawGeoInfo?.location?.latitude ?? 0,
+      longitude: rawGeoInfo?.location?.longitude ?? 0,
       asn: asnInfo,
     };
   }
