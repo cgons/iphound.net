@@ -27,18 +27,32 @@ export type IpAddress = {
 };
 
 export default class IpService {
-  private static instance: IpService;
+  private static instance: IpService | null = null;
+  private static initializing: Promise<IpService> | null = null;
   public geoLiteIpReader!: Reader<CityResponse>;
   public geoLiteAsnReader!: Reader<AsnResponse>;
 
-  constructor() {}
+  private constructor() {}
 
   public static async getInstance(): Promise<IpService> {
-    if (!IpService.instance) {
-      this.instance = new IpService();
-      await this.instance.initializeGeoLiteDb();
-    }
-    return this.instance;
+    // Fast path: already initialized.
+    if (IpService.instance) return IpService.instance;
+    // If initialization is in progress, share the same promise.
+    if (IpService.initializing) return IpService.initializing;
+
+    IpService.initializing = (async () => {
+      const service = new IpService();
+      await service.initializeGeoLiteDb();
+      IpService.instance = service;
+      IpService.initializing = null;
+      return service;
+      // Clear the in-flight promise on failure so callers can retry.
+    })().catch((error) => {
+      IpService.initializing = null;
+      throw error;
+    });
+
+    return IpService.initializing;
   }
 
   public async initializeGeoLiteDb() {
