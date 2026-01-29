@@ -122,8 +122,13 @@ export default class IpService {
       return ip;
     }
 
-    const ip = headers.get("x-forwarded-for") || "";
-    logger.info(`IP via x-forwarded-for header ${ip}`);
+    const forwardedFor = headers.get("x-forwarded-for") || "";
+    const ip =
+      forwardedFor
+        .split(",")
+        .map((entry) => entry.trim()) // remove any whitespace from each entry
+        .find(Boolean) || ""; // take the first non-empty entry - Boolean filters out empty strings
+    logger.info(`IP via x-forwarded-for header -> ${ip}`);
     return ip;
   }
 
