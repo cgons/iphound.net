@@ -62,7 +62,7 @@ This public IP is pulled directly from the incoming http request by the webserve
 
 #### API Usage
 
-If you're looking for geographic information (via [MaxMind Geo DB](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/)) about your ip address, a simple JSON endpoint is avaiable.
+If you're looking for geographic information about your ip address, a simple JSON endpoint is avaiable.
 
 API URL: `https://iphound.net/ip`
 
@@ -97,4 +97,37 @@ curl 'https://iphound.net/ip?geo=true'
 
 Tip: For quick testing in the terminal, pipe the output to [jq](https://github.com/jqlang/jq) - `curl -s 'iphound.net/ip?geo=true' | jq`
 
-_Note: As this is a free service, API requests are throttled to a couple requests per second (per IP)._
+#### API Rate Limiting
+
+As this is a free service, API requests are throttled to a couple requests per second (per IP). 
+See [rate limiting config.](https://github.com/cgons/iphound.net/blob/3df043f6b9521a90531993a1f5a898475c405042/iphound.Caddyfile#L60) for more details
+
+```bash
+hey -q 10 -c 5 -z 10s 'http://iphound.net/ip?geo=t
+
+Summary:
+  Total:	10.0513 secs
+  Slowest:	0.2333 secs
+  Fastest:	0.0409 secs
+  Average:	0.0527 secs
+  Requests/sec:	49.5461
+
+Response time histogram:
+  0.041 [1]	|
+  0.060 [414]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.079 [48]	|■■■■■
+  0.099 [27]	|■■■
+  0.118 [3]	|
+  0.137 [0]	|
+  0.156 [0]	|
+  0.176 [1]	|
+  0.195 [2]	|
+  0.214 [0]	|
+  0.233 [2]	|
+
+... details truncated ...
+
+Status code distribution:
+  [200]	60 responses
+  [429]	438 responses
+```
