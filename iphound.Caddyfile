@@ -1,4 +1,4 @@
-# Note: 
+# Note:
 # - This Caddyfile is designed to work with Caddy v2.x
 # - Needs to be imported into a parent Caddyfile that defines global options
 
@@ -30,11 +30,8 @@ http://iphound.net {
 		import respond_client_ip
 	}
 
-	# Requests to /ip, reverse proxy to the backend service
-	@ip path /ip
-	handle @ip {
-		reverse_proxy localhost:3000
-	}
+	# Requests to /ip, redirect to HTTPS
+	redir /ip* https://{host}{uri} 308
 
 	# Fallback (Catch-all for paths not matched above)
 	handle {
@@ -56,6 +53,22 @@ https://iphound.net {
 	}
 	# ---------------------------------------------
 
+	# Requests to /ip, reverse proxy to the backend service
+	@ip path /ip
+	handle @ip {
+		# Rate limiting (requires mholt/caddy-ratelimit)
+		rate_limit {
+			zone iphound {
+				key {client_ip}
+				events 60
+				window 1m
+			}
+		}
+		reverse_proxy localhost:3000
+	}
+
 	# For all other requests (including browsers), reverse proxy to the backend service
-	reverse_proxy localhost:3000
+	handle {
+		reverse_proxy localhost:3000
+	}
 }
