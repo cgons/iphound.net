@@ -1,12 +1,20 @@
-import winston from "winston";
+import winston, { format } from "winston";
+
+const formatter = () => {
+  return new Date().toLocaleString("en-CA", {
+    timeZoneName: "short",
+    hour12: false,
+    timeZone: "America/Toronto",
+  });
+};
 
 const logger = winston.createLogger({
   level: "debug",
-  transports: [
-    new winston.transports.Console({
-      format: winston.format.simple(),
-    }),
-  ],
+  format: winston.format.combine(
+    format.timestamp({ format: formatter }),
+    format.json(),
+  ),
+  transports: [new winston.transports.Console()],
 });
 
 export default logger;
