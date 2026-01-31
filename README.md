@@ -6,10 +6,7 @@ Repository for the open source IP lookup and geolocation service at https://ipho
 
 </div>
 
-<br/>
-
 ![Screenshot](docs/iphound-sc.png)
-
 
 ### Setup Development Environment
 
