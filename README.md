@@ -103,6 +103,8 @@ As this is a free service, API requests are throttled to a couple requests per s
 See [rate limiting config.](https://github.com/cgons/iphound.net/blob/3df043f6b9521a90531993a1f5a898475c405042/iphound.Caddyfile#L60) for more details
 
 ```bash
+# 10 req/s | 5 concurrent tasks | for 10 seconds
+# ---
 hey -q 10 -c 5 -z 10s 'http://iphound.net/ip?geo=t
 
 Summary:
@@ -131,3 +133,4 @@ Status code distribution:
   [200]	60 responses
   [429]	438 responses
 ```
+Rate limit testing was conducted with `hey` - https://github.com/rakyll/hey
