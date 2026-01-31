@@ -8,6 +8,16 @@ Repository for the open source IP lookup and geolocation service at https://ipho
 
 ![Screenshot](docs/iphound-sc.png)
 
+### Table of Contents
+
+- [Setup Development Environment](#setup-development-environment)
+- [Webserver Configuration (Caddyfile)](#webserver-configuration-caddyfile)
+- [Usage & APIs](#usage)
+  - [CLI Usage](#cli-usage)
+  - [API Usage](#api-usage)
+  - [API Responses](#api-responses)
+  - [API Rate Limiting](#api-rate-limiting)
+
 ### Setup Development Environment
 
 This service is built with NextJS (+ Tailwind) as a fullstack app. on Node v24.
@@ -48,7 +58,7 @@ In order for the project specific ([iphound.Caddyfile](https://github.com/cgons/
 }
 ```
 
-### Usage
+### Usage & APIs
 
 #### CLI Usage
 
@@ -104,7 +114,7 @@ See [rate limiting config.](https://github.com/cgons/iphound.net/blob/3df043f6b9
 ```bash
 # 10 req/s | 5 concurrent tasks | for 10 seconds
 # ---
-hey -q 10 -c 5 -z 10s 'http://iphound.net/ip?geo=t
+hey -q 10 -c 5 -z 10s 'http://iphound.net/ip?geo=t'
 
 Summary:
   Total:	10.0513 secs
@@ -118,13 +128,6 @@ Response time histogram:
   0.060 [414]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   0.079 [48]	|■■■■■
   0.099 [27]	|■■■
-  0.118 [3]	|
-  0.137 [0]	|
-  0.156 [0]	|
-  0.176 [1]	|
-  0.195 [2]	|
-  0.214 [0]	|
-  0.233 [2]	|
 
 ... details truncated ...
 
