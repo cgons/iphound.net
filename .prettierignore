@@ -2,3 +2,5 @@ node_modules/
 .next/
 dist/
 public/
+README.md
+AGENTS.md
