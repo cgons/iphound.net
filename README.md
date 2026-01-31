@@ -7,11 +7,13 @@ Repository for the open source IP lookup and geolocation service at https://ipho
 </div>
 
 <br/>
-<br/>
+
+![Screenshot](docs/iphound-sc.png)
+
 
 ### Setup Development Environment
 
-This service is built with NextJS as a fullstack app. on Node v24.
+This service is built with NextJS (+ Tailwind) as a fullstack app. on Node v24.
 
 ```bash
 git clone git@github.com:cgons/iphound.net.git
