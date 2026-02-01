@@ -1,3 +1,9 @@
+import CopyLabel from "@/lib/components/CopyLabel";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/lib/components/shadcn/ui/tooltip";
 import IpService from "@/lib/services/IpService";
 
 interface Props {
@@ -11,9 +17,16 @@ export default async function IpAddressDisplay(props: Props) {
   return (
     <div>
       <div className="mb-2">
-        <p className="mb-2 inline-block rounded-sm bg-indigo-400 px-2 py-0.5 text-[11px] font-bold text-white">
-          IPV4
-        </p>
+        <Tooltip>
+          <TooltipTrigger>
+            <CopyLabel
+              label="IPV4"
+              value={ipAddress.IPV4}
+              className="bg-indigo-400 hover:bg-indigo-500/90"
+            />
+          </TooltipTrigger>
+          <TooltipContent>Click to copy IPV4 address</TooltipContent>
+        </Tooltip>
         <p className="mb-2 text-xs font-semibold text-gray-400">
           Public IP Address
         </p>
@@ -34,9 +47,18 @@ export default async function IpAddressDisplay(props: Props) {
         ) : (
           <div className="pb-2">{renderNotAvailableMessage()}</div>
         )}
-        <p className="inline-block rounded-sm bg-gray-600 px-2 py-0.5 text-[11px] font-bold text-white">
-          IPV6
-        </p>
+        <Tooltip>
+          <TooltipTrigger>
+            <CopyLabel
+              label="IPV6"
+              value={ipAddress.IPV6}
+              className="bg-gray-600 hover:bg-gray-700"
+            />
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            Click to copy IPV6 address
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   );
