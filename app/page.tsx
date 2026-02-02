@@ -58,7 +58,7 @@ export default async function Page() {
           Geo location data powered by{" "}
           <a
             href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/"
-            className="italic hover:text-gray-700 hover:underline"
+            className="italic secondary-link"
           >
             MaxMind GeoLite DB
           </a>
@@ -67,10 +67,10 @@ export default async function Page() {
         <p className="mx-auto mb-2 max-w-44 border-b border-dotted border-gray-300 pb-1">
           <a
             href="https://github.com/cgons/iphound.net"
-            className="inline-block hover:text-gray-600"
+          className="inline-block secondary-link"
           >
             <GithubIconSVG />
-            &nbsp;<span>GitHub</span>
+            &nbsp;<span>cgons/iphound.net</span>
           </a>
         </p>
         <p>

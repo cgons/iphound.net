@@ -138,3 +138,9 @@
     display: inline-block !important;
   }
 }
+
+@layer utilities {
+  .secondary-link {
+    @apply hover:text-gray-700 hover:underline
+  }
+}
