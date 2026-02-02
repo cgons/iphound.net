@@ -82,7 +82,7 @@ Params:
 ```bash
 curl 'https://iphound.net/ip'
 {
-  "ipaddress": "173.206.100.156"
+  "ipaddress": "162.159.134.22"
 }
 
 # -----------------------------------
