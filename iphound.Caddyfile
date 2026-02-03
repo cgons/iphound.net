@@ -30,8 +30,8 @@ http://iphound.net {
 		import respond_client_ip
 	}
 
-	# Requests to /ip, redirect to HTTPS
-	redir /ip* https://{host}{uri} 308
+	# Requests to /api redirect to HTTPS
+	redir /api* https://{host}{uri} 308
 
 	# Fallback (Catch-all for paths not matched above)
 	handle {
@@ -53,8 +53,8 @@ https://iphound.net {
 	}
 	# ---------------------------------------------
 
-	# Requests to /ip, reverse proxy to the backend service
-	@ip path /ip
+	# Requests to /aip, reverse proxy to the backend service
+	@ip path /api*
 	handle @ip {
 		# Rate limiting (requires mholt/caddy-ratelimit)
 		rate_limit {

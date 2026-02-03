@@ -9,6 +9,8 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  --color-bprimary: var(--color-border);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -47,7 +49,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.928 0.006 264.531);
+  --border: oklch(87.2% 0.01 258.338 / 75%); /* gray-300/75 */
   --input: oklch(0.928 0.006 264.531);
   --ring: oklch(0.707 0.022 261.325);
 
@@ -139,8 +141,11 @@
   }
 }
 
-@layer utilities {
+@layer components {
+  .secondary-text {
+    @apply font-medium text-gray-500;
+  }
   .secondary-link {
-    @apply hover:text-gray-700 hover:underline
+    @apply underline decoration-gray-300 underline-offset-3 hover:text-gray-700 hover:decoration-gray-700!;
   }
 }

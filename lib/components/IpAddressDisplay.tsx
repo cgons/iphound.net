@@ -38,7 +38,7 @@ export default async function IpAddressDisplay(props: Props) {
           <div>{renderNotAvailableMessage()}</div>
         )}
       </div>
-      <div className="m-auto mb-2.5 h-1 max-w-10/12 border-b border-gray-200 px-5 pb-2.5 md:max-w-[500px]"></div>
+      <div className="border-bprimary m-auto mb-2.5 h-1 max-w-10/12 border-b px-5 pb-2.5 md:max-w-[500px]"></div>
       <div>
         {ipAddress.IPV6 ? (
           <h1 className="m-auto max-w-11/12 pb-1 font-black tracking-wider wrap-anywhere text-gray-600 lg:text-lg">

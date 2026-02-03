@@ -28,7 +28,7 @@ function isParamTrue(value: string | null): boolean {
 // ----------------------------------------------
 
 export async function GET(request: NextRequest) {
-  logger.info("GET /ip");
+  logger.info("GET /api/ip");
   const ipService = await IpService.getInstance();
   const url = new URL(request.url);
 
