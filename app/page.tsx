@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { CodeXml } from "lucide-react";
 import IpAddressDisplay from "@/lib/components/IpAddressDisplay";
 import Logo from "@/lib/components/Logo";
 import Image from "next/image";
@@ -6,6 +7,7 @@ import heroImage from "@/public/hero-image.jpg";
 import GithubIconSVG from "@/lib/components/GithubIconSVG";
 import IpService from "@/lib/services/IpService";
 import GeoAndConnectionInfo from "@/lib/components/GeoAndConnectionInfo";
+import CodeHighlight from "@/lib/components/CodeHighlight";
 
 export default async function Page() {
   const headersList = await headers();
@@ -48,7 +50,23 @@ export default async function Page() {
         </p>
       </div>
 
-      <footer className="mb-10 text-center text-sm font-medium text-gray-500 underline-offset-3">
+      <div className="mx-auto mb-6 max-w-md text-left">
+        <h1 className="mb-4 text-center text-xl font-black text-gray-500">
+          <CodeXml className="relative bottom-0.5 align-middle" /> API Access
+        </h1>
+        <p className="secondary-text mb-4 text-center text-sm">
+          For API usage details, see:&nbsp;
+          <a
+            href="https://github.com/cgons/iphound.net?tab=readme-ov-file#usage--apis"
+            className="secondary-link"
+          >
+            GitHub
+          </a>
+        </p>
+        <CodeHighlight />
+      </div>
+
+      <footer className="secondary-text mb-10 text-center text-sm">
         <div className="mb-5">
           <p>What is my public IP address?</p>
           <p className="font-semibold">{geoInfo.ipaddress}</p>
@@ -58,16 +76,16 @@ export default async function Page() {
           Geo location data powered by{" "}
           <a
             href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/"
-            className="italic secondary-link"
+            className="secondary-link italic"
           >
             MaxMind GeoLite DB
           </a>
         </p>
 
-        <p className="mx-auto mb-2 max-w-44 border-b border-dotted border-gray-300 pb-1">
+        <p className="border-bprimary mx-auto mb-2 max-w-44 border-b pb-1">
           <a
             href="https://github.com/cgons/iphound.net"
-          className="inline-block secondary-link"
+            className="secondary-link inline-block no-underline"
           >
             <GithubIconSVG />
             &nbsp;<span>cgons/iphound.net</span>
