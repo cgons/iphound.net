@@ -80,6 +80,7 @@ Params:
 
 #### API Responses
 ```bash
+# Fetch your public IP address
 curl -s 'https://iphound.net/api/ip'
 {
   "ipaddress": "162.159.134.22"
@@ -87,6 +88,7 @@ curl -s 'https://iphound.net/api/ip'
 
 # -----------------------------------
 
+# Fetch your public IP address with geo. data
 curl -s 'https://iphound.net/api/ip?geo=true'
 {
   "ipaddress": "162.159.134.22",
@@ -101,6 +103,16 @@ curl -s 'https://iphound.net/api/ip?geo=true'
     "asn_number": 13335,
     "asn_org": "Cloudflare, Inc."
   }
+}
+
+# -----------------------------------
+
+# Lookup info. for a specific IP address
+curl -X POST https://iphound.net/api/ip/lookup \
+-H 'Content-Type: application/json' \
+-d '{"ip":"8.8.8.8"}'
+{
+  ... same response as above ...
 }
 ```
 
