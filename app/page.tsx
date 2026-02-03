@@ -50,7 +50,7 @@ export default async function Page() {
         </p>
       </div>
 
-      <div className="mx-auto mb-6 max-w-md text-left">
+      <div className="mx-auto mb-6 max-w-[455px] text-left">
         <h1 className="mb-4 text-center text-xl font-black text-gray-500">
           <CodeXml className="relative bottom-0.5 align-middle" /> API Access
         </h1>

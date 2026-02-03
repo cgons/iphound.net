@@ -51,7 +51,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`antialiased ${openSans.variable || openSans.className}`}
+        className={`antialiased ${openSans.variable || openSans.className} px-4 md:px-0`}
       >
         {children}
       </body>

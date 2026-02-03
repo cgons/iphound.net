@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint --fix",
     "format": "prettier . --write",
-    "lint:format": "npm run lint && npm run format"
+    "format:lint": "npm run format && npm run lint"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
