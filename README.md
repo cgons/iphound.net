@@ -80,14 +80,14 @@ Params:
 
 #### API Responses
 ```bash
-curl 'https://iphound.net/ip'
+curl -s 'https://iphound.net/api/ip'
 {
   "ipaddress": "173.206.100.156"
 }
 
 # -----------------------------------
 
-curl 'https://iphound.net/ip?geo=true'
+curl -s 'https://iphound.net/api/ip?geo=true'
 {
   "ipaddress": "162.159.134.22",
   "country_name": "United States",
