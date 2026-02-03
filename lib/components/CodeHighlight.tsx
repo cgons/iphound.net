@@ -40,10 +40,8 @@ curl -s 'https://iphound.net/api/ip?geo=true'
 # -----------------------------------
 
 # Lookup info. for a specific IP address
-curl -X POST https://iphound.net/api/ip/lookup \
-
--H 'Content-Type: application/json' \
-
+curl -X POST https://iphound.net/api/ip/lookup \\
+-H 'Content-Type: application/json' \\
 -d '{"ip":"8.8.8.8"}'
 {
   ... same response as above ...
