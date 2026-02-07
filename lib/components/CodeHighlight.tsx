@@ -4,6 +4,7 @@ import ShikiHighlighter, {
   createHighlighterCore,
   createJavaScriptRegexEngine,
 } from "react-shiki/core";
+import { GeoInfo } from "@/lib/services/IpService";
 
 // Create custom highlighter with dynamic imports to optimize client-side bundle size
 const highlighter = await createHighlighterCore({
@@ -12,10 +13,15 @@ const highlighter = await createHighlighterCore({
   engine: createJavaScriptRegexEngine({ target: "ES2024" }),
 });
 
-const code = `# Fetch your public IP address
+type CodeHighlightProps = {
+  geoInfo: GeoInfo;
+};
+
+export default function CodeHighlight({ geoInfo }: CodeHighlightProps) {
+  const code = `# Fetch your public IP address
 curl -s 'https://iphound.net/api/ip'
 {
-  "ipaddress": "162.159.134.22"
+  "ipaddress": "${geoInfo.ipaddress}"
 }
 
 # -----------------------------------
@@ -23,17 +29,17 @@ curl -s 'https://iphound.net/api/ip'
 # Fetch your public IP address with geo. data
 curl -s 'https://iphound.net/api/ip?geo=true'
 {
-  "ipaddress": "162.159.134.22",
-  "country_name": "United States",
-  "country_iso_code": "CA",
-  "subdivision": "California",
-  "city_name": "San Francisco",
-  "postal_code": "94107",
-  "latitude": 37.7749,
-  "longitude": -122.4194,
+  "ipaddress": "${geoInfo.ipaddress}",
+  "country_name": "${geoInfo.country_name}",
+  "country_iso_code": "${geoInfo.country_iso_code}",
+  "subdivision": "${geoInfo.subdivision}",
+  "city_name": "${geoInfo.city_name}",
+  "postal_code": "${geoInfo.postal_code}",
+  "latitude": ${geoInfo.latitude},
+  "longitude": ${geoInfo.longitude},
   "asn": {
-    "asn_number": 13335,
-    "asn_org": "Cloudflare, Inc."
+    "asn_number": ${geoInfo.asn.asn_number ?? 0},
+    "asn_org": "${geoInfo.asn.asn_org ?? ""}"
   }
 }
 
@@ -42,13 +48,11 @@ curl -s 'https://iphound.net/api/ip?geo=true'
 # Lookup info. for a specific IP address
 curl -X POST https://iphound.net/api/ip/lookup \\
 -H 'Content-Type: application/json' \\
--d '{"ip":"8.8.8.8"}'
+-d '{"ip":"${geoInfo.ipaddress}"}'
 {
   ... same response as above ...
 }
 `;
-
-export default function CodeHighlight() {
   return (
     <ShikiHighlighter
       highlighter={highlighter}

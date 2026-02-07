@@ -63,7 +63,7 @@ export default async function Page() {
             GitHub
           </a>
         </p>
-        <CodeHighlight />
+        <CodeHighlight geoInfo={geoInfo} />
       </div>
 
       <footer className="secondary-text mb-10 text-center text-sm">
