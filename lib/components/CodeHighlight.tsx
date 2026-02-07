@@ -59,7 +59,7 @@ curl -X POST https://iphound.net/api/ip/lookup \\
       language="shellscript"
       theme="min-light"
       showLanguage={false}
-      className="border-bprimary rounded-lg border text-sm font-medium"
+      className="border-bprimary rounded-lg border text-[13px] font-medium"
     >
       {code}
     </ShikiHighlighter>
