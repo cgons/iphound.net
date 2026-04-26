@@ -2,7 +2,7 @@
 
 
 docker-build:
-		docker build -t iphound-webui .
+		docker build --platform linux/amd64 -t iphound-webui .
 
 sync-webui-image:
 		docker save iphound-webui:latest | ssh rnvps -C 'docker load'

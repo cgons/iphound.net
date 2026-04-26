@@ -1,5 +1,6 @@
 services:
   webui:
+    platform: linux/amd64
     image: iphound-webui:latest
     pull_policy: never
     ports:
