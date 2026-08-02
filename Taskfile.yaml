@@ -4,8 +4,9 @@ vars:
   IMAGE: iphound-webui
   REMOTE_HOST: rnvps
   REMOTE_COMPOSE: /home/ops/configs/iphound/docker-compose.yaml
+  GIT_REF: master
   TAG:
-    sh: echo "$(date -u +%Y%m%d)-$(git rev-parse --short HEAD)"
+    sh: echo "$(echo '{{.GIT_REF}}' | tr '/' '-')-$(git rev-parse --short '{{.GIT_REF}}')"
 
 tasks:
   deps:list:
@@ -19,10 +20,10 @@ tasks:
       - ncu -u --target minor
       - npm install
 
-  build:docker:
-    desc: Build and tag a Docker image of the app
+  build:docker-git:
+    desc: Build and tag a Docker image from the committed tree at {{.GIT_REF}} (ignores the working directory)
     cmds:
-      - docker build --platform linux/amd64 -t {{.IMAGE}}:{{.TAG}} -t {{.IMAGE}}:latest .
+      - git archive --format=tar '{{.GIT_REF}}' | docker build --platform linux/amd64 -t {{.IMAGE}}:{{.TAG}} -t {{.IMAGE}}:latest -
       - echo "Tagged {{.IMAGE}}:{{.TAG}} and {{.IMAGE}}:latest"
 
   deploy:sync:
@@ -35,9 +36,9 @@ tasks:
     cmds:
       - ssh -C {{.REMOTE_HOST}} 'docker compose -f {{.REMOTE_COMPOSE}} up --force-recreate -t 0 -d'
 
-  deploy:webui:
+  deploy:
     desc: Build the image, ship it to the remote host, and reload the stack
     cmds:
-      - task: build:docker
+      - task: build:docker-git
       - task: deploy:sync
       - task: deploy:reload
